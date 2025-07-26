@@ -11,16 +11,16 @@ const Navbar = () => {
       <div className=" side_padding  flex justify-between mx-auto py-4">
         <img src="/Svgs/logo.svg" alt="logo" />
         <ul className="unstyled flex gap-5 ">
-          <li className="flex font-semibold text-[15px]  items-center">
+          <li className=" font-semibold text-[15px]  items-center  hidden   md:flex ">
             Fiverr Pro <RiArrowDropDownLine size={25} />{" "}
           </li>
-          <li className="flex font-semibold text-[15px] text-gray-500 items-center">
+          <li className=" font-semibold text-[15px] text-gray-500 items-center hidden  md:flex">
             Explore <RiArrowDropDownLine size={25} />{" "}
           </li>
-          <li className="flex font-semibold text-[15px] text-gray-500 items-center">
+          <li className=" font-semibold text-[15px] text-gray-500 items-center hidden md:flex ">
             <CiGlobe size={20} /> EN{" "}
           </li>
-          <li className="flex font-semibold text-[15px] text-gray-500 items-center">
+          <li className=" font-semibold text-[15px] text-gray-500 items-center hidden sm:flex ">
             Become a Seller
           </li>
           <li className="flex font-semibold text-[15px] text-gray-500 items-center">

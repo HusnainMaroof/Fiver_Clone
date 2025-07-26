@@ -4,11 +4,15 @@ import dotenv from "dotenv"
 import { usersRouter } from "./Routes/registerUserRouter.js"
 import { errorHandler } from "./middleware/errorMiddlleware.js"
 import { connectDB } from "./Config/Connect.js"
-
+import cors from "cors"
 dotenv.config()
 const app = express()
-connectDB()
 
+
+app.use(cors())
+
+
+connectDB()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

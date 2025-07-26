@@ -43,3 +43,31 @@ export const registerUsers = async (req, res) => {
     res.json(createUsers)
 
 }
+
+
+export const checkMail = async (req, res) => {
+
+
+
+
+
+
+    const { email } = req.body
+
+
+
+
+    if (!email) {
+        res.status(401)
+
+    }
+    let isUsers = await Users.findOne({ email })
+
+
+    if (isUsers) {
+        res.send("Email Already Existed")
+    } else {
+        res.send("Email Not Existed")
+    }
+
+}

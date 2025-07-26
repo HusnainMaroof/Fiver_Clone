@@ -30,7 +30,7 @@ const FirstContent = () => {
       >
         <div onClick={handleNextModal} className="flex p-2 items-center">
           <MdOutlineEmail />
-          <p className="text-black text-sm font-semibold text-center w-full">
+          <p className="text-black text-sm font-semibold text-center w-full active:scale-95">
             Continue with Email
           </p>
         </div>
