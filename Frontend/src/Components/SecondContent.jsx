@@ -51,6 +51,7 @@ const SecondContent = () => {
 
   const checkMail = async () => {
     try {
+      if (!email) return;
       if (email) {
         setLoading(true);
         let response = await axios.post(
@@ -61,7 +62,6 @@ const SecondContent = () => {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error);
     }
   };
@@ -77,17 +77,39 @@ const SecondContent = () => {
   }, [email]);
 
   useEffect(() => {
+    let loadingAnimation;
+
     if (email) {
       setLoading(true);
 
-      let loading = setTimeout(() => {
+      loadingAnimation = setTimeout(() => {
         setLoading(false);
       }, 700);
     }
+
     return () => {
-      clearTimeout(loading);
+      if (loadingAnimation) {
+        clearTimeout(loadingAnimation);
+      }
     };
   }, [email]);
+
+  // const checkPassword = async () => {
+  //   if (exist !== "Email Already Existed" || !password) return;
+  //   try {
+  //     let response = await axios.post(
+  //       "http://localhost:5170/api/users/verify-mail",
+  //       password
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   checkPassword();
+  // }, [password]);
 
   return (
     <>
@@ -198,7 +220,7 @@ const SecondContent = () => {
                     : "cursor-pointer bg-gray-950 text-white  hover:bg-gray-950/80 hover:text-white border-gray-950"
                 }  `}
               >
-                {exist == "Email Already Existed" ? "Sign In" : "Continue" }
+                {exist == "Email Already Existed" ? "Sign In" : "Continue"}
               </button>
             </div>
           </div>

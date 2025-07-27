@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../context/Context";
 import { IoMdArrowBack } from "react-icons/io";
 
 const ThirdContent = ({ handleBack }) => {
   const { userName, setUserName } = useContext(AppContext);
+  const [isUserNameRulesValid, setIsUserNameRulesValid] = useState(false);
   return (
     <>
       <div className="bg-white w-full  flex flex-col justify-between h-full">
@@ -56,8 +57,9 @@ const ThirdContent = ({ handleBack }) => {
         <div className="w-full items-baseline ">
           <button
             type="button"
+            disabled={!isUserNameRulesValid ? "true" : "false"}
             className={`py-1.5 border-2 rounded-md border-gray-300 w-full font-semibold  ${
-              !isPasswordValid
+              !isUserNameRulesValid
                 ? "cursor-not-allowed text-gray-400 bg-gray-100"
                 : "cursor-pointer bg-gray-800 text-white  hover:bg-gray-800/40 hover:text-white"
             }  `}
