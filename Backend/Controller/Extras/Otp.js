@@ -1,13 +1,12 @@
 
-import otpgenerator from "otp-generator"
+
 import nodemailer from "nodemailer"
 
 
-export const sendOTP = (email) => {
+export const sendOTP = (email, otp) => {
 
 
-    let otp = otpgenerator.generate(6,
-        { upperCaseAlphabets: false, specialChars: false, digits: true, lowerCaseAlphabets: false })
+
 
     let emailSender = nodemailer.createTransport({
         service: "gmail",

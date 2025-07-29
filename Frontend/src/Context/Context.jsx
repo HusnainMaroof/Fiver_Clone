@@ -8,24 +8,25 @@ export const AppProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
+  const [RegPopUpPic, setRegPopUpPic] = useState({
+    intalsPic: false,
+    UserNamePic: false,
+    otpPic: false,
+  });
 
   const handleNextModal = () => {
     setClicked(true);
   };
   const handleBackModal = () => {
     setClicked(false);
-    };
-    
+  };
 
- const [ruleStates, setRulesStates] = useState({
-   length: false,
-   upper: false,
-   lower: false,
-   number: false,
- });
-
-
-
+  const [ruleStates, setRulesStates] = useState({
+    length: false,
+    upper: false,
+    lower: false,
+    number: false,
+  });
 
   return (
     <AppContext.Provider
@@ -42,6 +43,8 @@ export const AppProvider = ({ children }) => {
         ruleStates,
         userName,
         setUserName,
+        RegPopUpPic,
+        setRegPopUpPic,
       }}
     >
       {children}

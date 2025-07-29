@@ -17,7 +17,17 @@ const SecondContent = () => {
     setPassword,
     setRulesStates,
     ruleStates,
+    setRegPopUpPic,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    setRegPopUpPic({
+      intalsPic: true,
+      UserNamePic: false,
+      otpPic: false,
+    });
+  }, []);
+
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -55,7 +65,7 @@ const SecondContent = () => {
       if (email) {
         setLoading(true);
         let response = await axios.post(
-          "http://localhost:5170/api/users/verify-mail",
+          "http://localhost:5174/api/users/verify-mail",
           { email }
         );
         setExist(response.data);
