@@ -70,7 +70,7 @@ const ThirdContent = ({ handleBack }) => {
         let isTaken = response.data === "UserName Already Existed";
 
         setExstedUserName(isTaken);
-        console.log(`is Username exist ${existedUserName} `);
+       
 
         setLoading(false);
       } catch (error) {

@@ -104,29 +104,12 @@ const SecondContent = () => {
     };
   }, [email]);
 
-  // const checkPassword = async () => {
-  //   if (exist !== "Email Already Existed" || !password) return;
-  //   try {
-  //     let response = await axios.post(
-  //       "http://localhost:5170/api/users/verify-mail",
-  //       password
-  //     );
-  //     console.log(response);
-  //   } catch (error) {
-  //     toast.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   checkPassword();
-  // }, [password]);
-
   return (
     <>
       {clicked ? (
         <ThirdContent handleBack={handleBack} />
       ) : (
-        <div className="bg-white   flex flex-col  h-full  ">
+        <div className="bg-white flex flex-col h-full  w-full">
           <div
             onClick={handleBackModal}
             className="flex gap-2 cursor-pointer items-center"
