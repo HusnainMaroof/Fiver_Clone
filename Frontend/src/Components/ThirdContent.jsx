@@ -7,8 +7,14 @@ import axios from "axios";
 import Otp from "./Otp";
 
 const ThirdContent = ({ handleBack }) => {
-  const { userName, setUserName, RegPopUpPic, setRegPopUpPic } =
-    useContext(AppContext);
+  const {
+    userName,
+    setUserName,
+    RegPopUpPic,
+    setRegPopUpPic,
+    email,
+    password,
+  } = useContext(AppContext);
   const [isUserNameRulesValid, setIsUserNameRulesValid] = useState(false);
   const [existedUserName, setExstedUserName] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -70,7 +76,6 @@ const ThirdContent = ({ handleBack }) => {
         let isTaken = response.data === "UserName Already Existed";
 
         setExstedUserName(isTaken);
-       
 
         setLoading(false);
       } catch (error) {
@@ -96,6 +101,21 @@ const ThirdContent = ({ handleBack }) => {
       setLoading(false);
     }
   }, [userName]);
+
+  const handelSignUp = async () => {
+    setClicked(true);
+
+    try {
+      let response = await axios.post(
+        "http://localhost:5174/api/users/register-user",
+        { email, password, userName }
+      );
+
+      console.log(response.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <>
@@ -189,7 +209,7 @@ const ThirdContent = ({ handleBack }) => {
 
           <div className="w-full items-baseline">
             <button
-              onClick={() => setClicked(true)}
+              onClick={handelSignUp}
               type="button"
               disabled={!isUserNameRulesValid}
               className={`py-1.5 border-2 rounded-md border-gray-300 w-full font-semibold relative ${

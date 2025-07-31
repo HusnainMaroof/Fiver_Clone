@@ -114,3 +114,35 @@ export const verifyOtp = async (req, res) => {
 }
 
 
+export const checkSignInPass = async (req, res) => {
+    const { password } = req.body
+    const user_id = req.params.id
+    if (!password) {
+        res.send(400)
+        throw new Error("Please Enter The passwords")
+    }
+
+
+    const findUsers = await Users.findById(user_id)
+
+    if (!findUsers) {
+        res.status(404)
+        throw new Error("User Not Found")
+    }
+
+
+
+    if (password == findUsers.password) {
+        res.send("Password Matched")
+    } else {
+        res.status(401)
+    
+        throw new Error("Invalid Passwords ")
+    }
+
+
+    res.send(findUsers)
+
+}
+
+
