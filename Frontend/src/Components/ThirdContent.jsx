@@ -74,9 +74,7 @@ const ThirdContent = ({ handleBack }) => {
         );
 
         let isTaken = response.data === "UserName Already Existed";
-
         setExstedUserName(isTaken);
-
         setLoading(false);
       } catch (error) {
         toast.error(error);
@@ -112,6 +110,7 @@ const ThirdContent = ({ handleBack }) => {
       );
 
       console.log(response.data);
+      localStorage.setItem("users", JSON.stringify(response.data));
     } catch (error) {
       toast.error(error);
     }

@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../context/Context";
 import { PuffLoader } from "react-spinners";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Otp = () => {
   const { setRegPopUpPic } = useContext(AppContext);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
   const [validOTP, setValidOTP] = useState(false);
-  const [succes, setSucces] = useState(false);
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resend, setResend] = useState(false);
   const [resendTimer, setResendTimer] = useState(30);
@@ -66,7 +69,29 @@ const Otp = () => {
     }, 1000);
   };
 
-  const handelSubmit = () => {};
+
+  let navigate = useNavigate()
+  const handelSubmit = async () => {
+     const enteredOtp = otp.join("");
+    try {
+      let users = JSON.parse(localStorage.getItem("users"));
+
+      let response = await axios.post(
+        `http://localhost:5174/api/users/verify-otp/${users?._id}`,
+        { otp:enteredOtp }
+      );
+
+      if (users.otp == enteredOtp) {
+        toast.success("otp is valid ")
+        setError(false);
+        navigate('/main-page')
+      }
+      
+    } catch (error) {
+      setError(true);
+      toast.error(error.response.data);
+    }
+  };
 
   return (
     <>
@@ -80,7 +105,7 @@ const Otp = () => {
             </p>
 
             <p className="text-md font-bold text-gray-700 py-1.5">
-              email@gmail.com.
+              {JSON.parse(localStorage.getItem('users')).email }
             </p>
           </div>
           <div className="flex items-center justify-center gap-x-1 mt-10">
@@ -95,12 +120,12 @@ const Otp = () => {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 ref={(el) => (inputRefs.current[index] = el)}
                 className={`w-10 md:w-12 h-10 md:h-12 text-2xl text-center border  rounded focus:outline-none focus:ring-2 focus:ring-gray-800 ${
-                  succes ? "border-red-500" : "border-gray-300"
+                  error ? "border-red-500" : "border-gray-300"
                 } `}
               />
             ))}
           </div>
-          {succes && (
+          {error && (
             <p className="text-red-500 py-2 font-semibold my-1.5">
               You've entered the wrong code. Try again.
             </p>

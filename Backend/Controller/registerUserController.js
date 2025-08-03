@@ -136,7 +136,7 @@ export const checkSignInPass = async (req, res) => {
         res.send("Password Matched")
     } else {
         res.status(401)
-    
+
         throw new Error("Invalid Passwords ")
     }
 
