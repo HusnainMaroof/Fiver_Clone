@@ -7,6 +7,7 @@ import ThirdContent from "./ThirdContent";
 import axios from "axios";
 import { PuffLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import ForgotPassContent from "./ForgotPassContent";
 
 const SecondContent = () => {
   const {
@@ -33,6 +34,9 @@ const SecondContent = () => {
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [exist, setExist] = useState("");
+
+  const [showForgotPass, setShowForgotpss] = useState(false);
+
   const handleBack = () => {
     setClicked(false);
   };
@@ -108,6 +112,8 @@ const SecondContent = () => {
     <>
       {clicked ? (
         <ThirdContent handleBack={handleBack} />
+      ) : showForgotPass ? (
+        <ForgotPassContent setShowForgotpss={setShowForgotpss} />
       ) : (
         <div className="bg-white flex flex-col h-full  w-full">
           <div
@@ -176,30 +182,42 @@ const SecondContent = () => {
                 </div>
               </div>
 
-              <div className="my-4 space-y-2">
-                {passwordRules.map((rule, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <span
-                      className={`border-2 rounded-full p-1 flex items-center justify-center w-5 h-5 ${
-                        ruleStates[rule.key]
-                          ? "bg-green-500 text-white border-green-500"
-                          : "border-gray-300 text-gray-500"
-                      }`}
-                    >
-                      <IoMdCheckmark size={12} />
-                    </span>
-                    <p
-                      className={`text-sm font-semibold ${
-                        ruleStates[rule.key]
-                          ? "text-green-600 line-through"
-                          : "text-gray-600"
-                      }`}
-                    >
-                      {rule.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              {exist === "Email Already Existed" ? (
+                <div className="text-end">
+                  <button
+                    onClick={() => setShowForgotpss(true)}
+                    type="button"
+                    className="underline  font-semibold text-gray-800 hover:no-underline hover:cursor-pointer hover:text-gray-600 "
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+              ) : (
+                <div className="my-4 space-y-2">
+                  {passwordRules.map((rule, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <span
+                        className={`border-2 rounded-full p-1 flex items-center justify-center w-5 h-5 ${
+                          ruleStates[rule.key]
+                            ? "bg-green-500 text-white border-green-500"
+                            : "border-gray-300 text-gray-500"
+                        }`}
+                      >
+                        <IoMdCheckmark size={12} />
+                      </span>
+                      <p
+                        className={`text-sm font-semibold ${
+                          ruleStates[rule.key]
+                            ? "text-green-600 line-through"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        {rule.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="w-full items-baseline">

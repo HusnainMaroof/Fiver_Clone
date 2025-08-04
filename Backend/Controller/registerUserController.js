@@ -146,3 +146,28 @@ export const checkSignInPass = async (req, res) => {
 }
 
 
+export const resendOtp = async (req, res) => {
+    const users_id = req.params.user_id;
+    const { email } = req.body
+
+
+
+    const findUser = await Users.findById(users_id)
+
+
+    if (!findUser) {
+        res.status(404)
+        throw new Error("USers not found")
+
+    }
+
+    let otp = otpgenerator.generate(6, { digits: true, upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false })
+
+    sendOTP(email, otp)
+
+    findUser.otp = otp
+    await findUser.save()
+
+    res.json(findUser)
+
+}

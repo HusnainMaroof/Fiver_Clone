@@ -109,8 +109,9 @@ const ThirdContent = ({ handleBack }) => {
         { email, password, userName }
       );
 
-      console.log(response.data);
       localStorage.setItem("users", JSON.stringify(response.data));
+
+      toast.success(`otp sended to you ${response.data.email}  email`);
     } catch (error) {
       toast.error(error);
     }

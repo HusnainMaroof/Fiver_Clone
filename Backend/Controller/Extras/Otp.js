@@ -24,53 +24,105 @@ export const sendOTP = (email, otp) => {
         html: `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OTP Verification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      max-width: 100%;
+      margin: 50px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #1dbf73, #0e9f6e);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .content {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .content p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .otp-box {
+      display: inline-block;
+      background-color: #e8f5ee;
+      border: 2px solid #1dbf73;
+      border-radius: 8px;
+      padding: 15px 25px;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #1dbf73;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #999;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .footer a {
+      color: #1dbf73;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; background-color: #e0e7ff;">
-    <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #e0e7ff; padding: 20px;">
-        <tr>
-            <td align="center">
-                <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-                    <!-- Header -->
-                    <tr>
-                        <td style="background: linear-gradient(90deg, #ff6b6b, #4ecdc4); padding: 40px 20px; text-align: center;">
-                            <h1 style="color: #ffffff; font-size: 28px; margin: 0; font-weight: 600;">OTP Verification</h1>
-                        </td>
-                    </tr>
-                    <!-- Body -->
-                    <tr>
-                        <td style="padding: 40px 20px; text-align: center;">
-                            <h2 style="color: #1f2937; font-size: 22px; margin: 0 0 20px; font-weight: 500;">Verify Your Account</h2>
-                            <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin: 0 0 20px;">
-                                Thank you for choosing us! Use the One-Time Password (OTP) below to verify your account. This code is valid for the next 10 minutes.
-                            </p>
-                            <div style="background-color: #f0fdf4; display: inline-block; padding: 15px 40px; border-radius: 8px; margin: 20px 0; border: 1px solid #6ee7b7;">
-                                <span style="font-size: 26px; font-weight: bold; color: #059669; letter-spacing: 3px;">${otp}</span>
-                            </div >
-                            <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0 0 20px;">
-                                If you didn’t request this OTP, please ignore this email or contact our support team.
-                            </p>
-                            <a href="#" style="display: inline-block; background: linear-gradient(90deg, #ff6b6b, #4ecdc4); color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 600; transition: transform 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">Verify Now</a>
-                        </td >
-                    </tr >
-                    < !--Footer -->
-    <tr>
-        <td style="background-color: #f8fafc; padding: 20px; text-align: center; font-size: 12px; color: #6b7280;">
-            <p style="margin: 0 0 10px;">&copy; 2025 Your Company Name. All rights reserved.</p>
-            <p style="margin: 0;">
-                <a href="#" style="color: #ff6b6b; text-decoration: none; margin: 0 10px; font-weight: 500;">Privacy Policy</a> |
-                <a href="#" style="color: #ff6b6b; text-decoration: none; margin: 0 10px; font-weight: 500;">Contact Us</a>
-            </p>
-        </td>
-    </tr>
-                </table >
-            </td >
-        </tr >
-    </table >
-    <script>(function(){function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'963b5e6c5b3cb049',t:'MTc1MzI3NTcxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } }if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){ };document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body >
-</html > `
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>OTP Verification</h1>
+    </div>
+
+    <div class="content">
+      <h2>Verify Your Account</h2>
+      <p>Thank you for joining us! Use the One-Time Password (OTP) below to verify your account. This code is valid for the next 10 minutes.</p>
+      <div class="otp-box" id="otp"> ${otp} </div>
+      <p style="margin-top: 25px; font-size: 13px; color: #888;">If you didn’t request this OTP, please ignore this email or contact our support team.</p>
+    </div>
+
+    <div class="footer">
+      © 2025 Your Company Name. All rights reserved. |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+
+</body>
+</html>
+`
     }
 
 

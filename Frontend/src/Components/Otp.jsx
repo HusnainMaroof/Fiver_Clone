@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Otp = () => {
-  const { setRegPopUpPic } = useContext(AppContext);
+  const { setRegPopUpPic, email } = useContext(AppContext);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
   const [validOTP, setValidOTP] = useState(false);
@@ -52,7 +52,16 @@ const Otp = () => {
     }
   }, [otp]);
 
-  const handleResend = () => {
+  const handleResend = async () => {
+    let users = JSON.parse(localStorage.getItem("users"));
+    let response = await axios.post(
+      `http://localhost:5174/api/users/resend-otp/${users._id}`,
+      { email }
+    );
+
+
+    toast.success("Otp resend successfully");
+    
     setOtp(["", "", "", "", "", ""]);
     setResend(true);
     setResendTimer(30);
@@ -67,26 +76,25 @@ const Otp = () => {
         return prev - 1;
       });
     }, 1000);
+
   };
 
-
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const handelSubmit = async () => {
-     const enteredOtp = otp.join("");
+    const enteredOtp = otp.join("");
     try {
       let users = JSON.parse(localStorage.getItem("users"));
 
       let response = await axios.post(
         `http://localhost:5174/api/users/verify-otp/${users?._id}`,
-        { otp:enteredOtp }
+        { otp: enteredOtp }
       );
 
-      if (users.otp == enteredOtp) {
-        toast.success("otp is valid ")
+      if (response.data) {
+        toast.success("otp is valid ");
         setError(false);
-        navigate('/main-page')
+        navigate("/main-page");
       }
-      
     } catch (error) {
       setError(true);
       toast.error(error.response.data);
@@ -105,7 +113,7 @@ const Otp = () => {
             </p>
 
             <p className="text-md font-bold text-gray-700 py-1.5">
-              {JSON.parse(localStorage.getItem('users')).email }
+              {JSON.parse(localStorage.getItem("users")).email}
             </p>
           </div>
           <div className="flex items-center justify-center gap-x-1 mt-10">
